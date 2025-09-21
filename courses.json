@@ -1,0 +1,65 @@
+[
+  {
+    "title": "UI/UX Design",
+    "desc": "Desain antarmuka dan pengalaman pengguna yang menarik",
+    "duration": "⏱️ 3-4 Bulan",
+    "level": "📊 Pemula - Mahir",
+    "icon": "<svg width='24' height='24' viewBox='0 0 24 24' fill='none'><rect x='3' y='3' width='18' height='18' rx='2' stroke='#2563EB' stroke-width='2'/><path d='M9 9H15M9 13H12' stroke='#2563EB' stroke-width='2' stroke-linecap='round'/></svg>"
+  },
+  {
+    "title": "Web Basic",
+    "desc": "Frontend & Backend development dengan teknologi modern",
+    "duration": "⏱️ 4-6 Bulan",
+    "level": "📊 Pemula - Basic",
+    "icon": "<svg width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M16 18L22 12L16 6M8 6L2 12L8 18' stroke='#2563EB' stroke-width='2' stroke-linecap='round'/></svg>"
+  },
+  {
+    "title": "Graphic Design Canva",
+    "desc": "Belajar Dasar Desain Grafis menggunakan aplikasi canva",
+    "duration": "⏱️ 4-6 Bulan",
+    "level": "📊 Pemula - Basic",
+    "icon": "<svg width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M21 16V8C21 5.79 19.21 4 17 4H7C4.79 4 3 5.79 3 8V16C3 18.21 4.79 20 7 20H17C19.21 20 21 18.21 21 16Z' stroke='#2563EB' stroke-width='2'/><path d='M7 12L12 7L17 12L12 17L7 12Z' fill='#2563EB' opacity='0.2'/></svg>"
+  },
+  {
+    "title": "Adobe Photoshop",
+    "desc": "Leadership, komunikasi, dan manajemen project",
+    "duration": "⏱️ 1-2 Bulan",
+    "level": "📊 Menengah - Intermediate",
+    "icon": "<svg width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21' stroke='#2563EB' stroke-width='2'/><circle cx='9' cy='7' r='4' stroke='#2563EB' stroke-width='2'/><path d='M23 21V19C23 17.13 21.87 15.57 20.24 15.17' stroke='#2563EB' stroke-width='2'/><path d='M16 3.13C17.63 3.53 18.76 5.09 18.76 6.96S17.63 10.39 16 10.79' stroke='#2563EB' stroke-width='2'/></svg>"
+  },
+  {
+    "title": "Adobe Illustrator",
+    "desc": "Leadership, komunikasi, dan manajemen project",
+    "duration": "⏱️ 1-2 Bulan",
+    "level": "📊 Menengah - Intermediate",
+    "icon": "<svg width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21' stroke='#2563EB' stroke-width='2'/><circle cx='9' cy='7' r='4' stroke='#2563EB' stroke-width='2'/><path d='M23 21V19C23 17.13 21.87 15.57 20.24 15.17' stroke='#2563EB' stroke-width='2'/><path d='M16 3.13C17.63 3.53 18.76 5.09 18.76 6.96S17.63 10.39 16 10.79' stroke='#2563EB' stroke-width='2'/></svg>"
+  },
+   {
+    "title": "Framework Laravel",
+    "desc": "Leadership, komunikasi, dan manajemen project",
+    "duration": "⏱️ 1-2 Bulan",
+    "level": "📊 Mahir - Advance",
+    "icon": "<svg width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21' stroke='#2563EB' stroke-width='2'/><circle cx='9' cy='7' r='4' stroke='#2563EB' stroke-width='2'/><path d='M23 21V19C23 17.13 21.87 15.57 20.24 15.17' stroke='#2563EB' stroke-width='2'/><path d='M16 3.13C17.63 3.53 18.76 5.09 18.76 6.96S17.63 10.39 16 10.79' stroke='#2563EB' stroke-width='2'/></svg>"
+  },
+   {
+    "title": "PHP Native",
+    "desc": "Leadership, komunikasi, dan manajemen project",
+    "duration": "⏱️ 1-2 Bulan",
+    "level": "📊 Menengah - Intermediate",
+    "icon": "<svg width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21' stroke='#2563EB' stroke-width='2'/><circle cx='9' cy='7' r='4' stroke='#2563EB' stroke-width='2'/><path d='M23 21V19C23 17.13 21.87 15.57 20.24 15.17' stroke='#2563EB' stroke-width='2'/><path d='M16 3.13C17.63 3.53 18.76 5.09 18.76 6.96S17.63 10.39 16 10.79' stroke='#2563EB' stroke-width='2'/></svg>"
+  },
+   {
+    "title": "Coding For Kids",
+    "desc": "Leadership, komunikasi, dan manajemen project",
+    "duration": "⏱️ 1-2 Bulan",
+    "level": "📊 Pemula - Basic",
+    "icon": "<svg width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21' stroke='#2563EB' stroke-width='2'/><circle cx='9' cy='7' r='4' stroke='#2563EB' stroke-width='2'/><path d='M23 21V19C23 17.13 21.87 15.57 20.24 15.17' stroke='#2563EB' stroke-width='2'/><path d='M16 3.13C17.63 3.53 18.76 5.09 18.76 6.96S17.63 10.39 16 10.79' stroke='#2563EB' stroke-width='2'/></svg>"
+  },
+   {
+    "title": "Microsoft Office",
+    "desc": "Leadership, komunikasi, dan manajemen project",
+    "duration": "⏱️ 1-2 Bulan",
+    "level": "📊 Pemula - Basic",
+    "icon": "<svg width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21' stroke='#2563EB' stroke-width='2'/><circle cx='9' cy='7' r='4' stroke='#2563EB' stroke-width='2'/><path d='M23 21V19C23 17.13 21.87 15.57 20.24 15.17' stroke='#2563EB' stroke-width='2'/><path d='M16 3.13C17.63 3.53 18.76 5.09 18.76 6.96S17.63 10.39 16 10.79' stroke='#2563EB' stroke-width='2'/></svg>"
+  }
+]

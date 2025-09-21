@@ -1,0 +1,49 @@
+ <!-- Navigation -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex items-center space-x-3">
+                        <!-- Logo SVG -->
+                       <img src="assets/img/logo1.png" width="32" height="32" alt="Logo ACADE">
+                        <div class="text-2xl font-bold text-brand-blue">ARCADE</div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#kelas" class="text-gray-600 hover:text-brand-blue transition-colors">Kelas</a>
+                    <a href="#benefit" class="text-gray-600 hover:text-brand-blue transition-colors">Keunggulan</a>
+                    <a href="#testimoni" class="text-gray-600 hover:text-brand-blue transition-colors">Alumni</a>
+                    <a href="#faq" class="text-gray-600 hover:text-brand-blue transition-colors">FAQ</a>
+                </div>
+                
+                <!-- Desktop Login Button -->
+                <button class="hidden md:block bg-brand-blue text-white px-6 py-2 rounded-lg hover:bg-brand-dark transition-colors font-medium">
+                    Masuk
+                </button>
+                
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-600 hover:text-brand-blue hover:bg-gray-100 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur-sm">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="#kelas" class="block px-3 py-2 text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition-colors">Kelas</a>
+                    <a href="#benefit" class="block px-3 py-2 text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition-colors">Keunggulan</a>
+                    <a href="#testimoni" class="block px-3 py-2 text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition-colors">Alumni</a>
+                    <a href="#faq" class="block px-3 py-2 text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition-colors">FAQ</a>
+                    <div class="pt-2">
+                        <button class="w-full bg-brand-blue text-white px-6 py-2 rounded-lg hover:bg-brand-dark transition-colors font-medium">
+                            Masuk
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
