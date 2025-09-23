@@ -1,4 +1,4 @@
- fetch("/courses.json")
+ fetch("./courses.json")
     .then(res => {
       if (!res.ok) throw new Error("Gagal load JSON");
       return res.json();
