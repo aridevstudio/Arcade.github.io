@@ -11,6 +11,101 @@
             box-sizing: border-box;
         }
         
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loading-logo {
+            animation: bounce 1s infinite;
+        }
+        
+        .loading-text {
+            animation: pulse 2s infinite;
+        }
+        
+        .loading-bar {
+            width: 200px;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            border-radius: 3px;
+            animation: loading 2s ease-in-out;
+        }
+        
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
         .pixel-font {
             font-family: 'Press Start 2P', monospace;
         }
@@ -130,16 +225,30 @@
     </style>
 </head>
 <body class="bg-white clean-font">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">
+            <div class="w-20 h-20 bg-yellow-400 border-4 border-black flex items-center justify-center mb-6">
+                <span class="pixel-font text-blue-900 text-lg">ARC</span>
+            </div>
+        </div>
+        <h2 class="pixel-font text-yellow-400 text-xl mb-2 loading-text">ARCADE LOADING...</h2>
+        <p class="clean-font text-white text-sm mb-4">Preparing your digital adventure</p>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
     <!-- Header/Navigation -->
     <header class="bg-white shadow-lg sticky top-0 z-50 border-b-2 border-gray-100">
-        <nav class="container mx-auto px-6 py-4">
+        <nav class="container mx-auto px-4 py-3">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-yellow-400 border-3 border-black flex items-center justify-center pixel-icon">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-yellow-400 border-3 border-black flex items-center justify-center pixel-icon">
                         <span class="pixel-font text-blue-900 text-xs">ARC</span>
                     </div>
-                    <span class="pixel-font text-blue-900 text-xl">ARCADE</span>
+                    <span class="pixel-font text-blue-900 text-lg md:text-xl">ARCADE</span>
                 </div>
                 
                 <!-- Navigation Links -->
@@ -149,19 +258,31 @@
                     <a href="#event" class="nav-link clean-font font-medium text-gray-700">Event</a>
                 </div>
                 
-                <!-- CTA Button -->
-                <button class="game-button px-6 py-3 pixel-font text-sm text-blue-900">
+                <!-- CTA Button Desktop -->
+                <button class="hidden md:block game-button px-6 py-3 pixel-font text-sm text-blue-900">
                     DAFTAR SEKARANG
                 </button>
                 
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden p-2">
+                <button class="md:hidden p-2" id="mobileMenuBtn">
                     <div class="w-6 h-6 flex flex-col justify-center space-y-1">
-                        <div class="w-full h-0.5 bg-gray-700"></div>
-                        <div class="w-full h-0.5 bg-gray-700"></div>
-                        <div class="w-full h-0.5 bg-gray-700"></div>
+                        <div class="w-full h-0.5 bg-gray-700 transition-all duration-300" id="line1"></div>
+                        <div class="w-full h-0.5 bg-gray-700 transition-all duration-300" id="line2"></div>
+                        <div class="w-full h-0.5 bg-gray-700 transition-all duration-300" id="line3"></div>
                     </div>
                 </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="md:hidden overflow-hidden transition-all duration-300 max-h-0" id="mobileMenu">
+                <div class="py-4 space-y-4 border-t border-gray-200 mt-4">
+                    <a href="#kelas" class="block clean-font font-medium text-gray-700 hover:text-yellow-500 transition-colors">Kelas</a>
+                    <a href="#materi" class="block clean-font font-medium text-gray-700 hover:text-yellow-500 transition-colors">Materi</a>
+                    <a href="#event" class="block clean-font font-medium text-gray-700 hover:text-yellow-500 transition-colors">Event</a>
+                    <button class="w-full game-button px-4 py-2 pixel-font text-xs text-blue-900 mt-4">
+                        DAFTAR SEKARANG
+                    </button>
+                </div>
             </div>
         </nav>
     </header>
@@ -171,7 +292,7 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Hero Content -->
-                <div class="space-y-8">
+                <div class="space-y-8 slide-in-left">
                     <h1 class="pixel-font text-yellow-400 text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight">
                         LEVEL UP<br>
                         SKILL DIGITALMU!
@@ -186,32 +307,138 @@
                 </div>
                 
                 <!-- Hero Illustration -->
-                <div class="relative">
+                <div class="relative slide-in-right">
                     <div class="float-animation">
-                        <!-- Pixel Character -->
-                        <svg width="300" height="300" viewBox="0 0 300 300" class="mx-auto">
-                            <!-- Character Body -->
-                            <rect x="120" y="140" width="60" height="80" fill="#4F46E5" stroke="#000" stroke-width="2"/>
-                            <!-- Character Head -->
-                            <rect x="130" y="100" width="40" height="40" fill="#FCD34D" stroke="#000" stroke-width="2"/>
-                            <!-- Hat -->
-                            <rect x="125" y="90" width="50" height="20" fill="#DC2626" stroke="#000" stroke-width="2"/>
+                        <!-- Modern Tech Student Character -->
+                        <svg width="400" height="400" viewBox="0 0 400 400" class="mx-auto">
+                            <!-- Background Circle -->
+                            <circle cx="200" cy="200" r="180" fill="#F8FAFC" stroke="none"/>
+                            
+                            <!-- Laptop -->
+                            <ellipse cx="200" cy="280" rx="120" ry="60" fill="#E2E8F0"/>
+                            <rect x="80" y="220" width="240" height="120" fill="#1E293B" rx="12"/>
+                            <rect x="90" y="230" width="220" height="100" fill="#334155" rx="8"/>
+                            
+                            <!-- Laptop Screen -->
+                            <rect x="140" y="80" width="120" height="140" fill="#0F172A" rx="8"/>
+                            <rect x="150" y="90" width="100" height="120" fill="#1E40AF" rx="4"/>
+                            
+                            <!-- Code Lines on Screen -->
+                            <rect x="155" y="100" width="30" height="3" fill="#10B981" rx="1.5"/>
+                            <rect x="155" y="110" width="50" height="3" fill="#F59E0B" rx="1.5"/>
+                            <rect x="155" y="120" width="40" height="3" fill="#EF4444" rx="1.5"/>
+                            <rect x="155" y="130" width="60" height="3" fill="#8B5CF6" rx="1.5"/>
+                            <rect x="155" y="140" width="35" height="3" fill="#10B981" rx="1.5"/>
+                            <rect x="155" y="150" width="45" height="3" fill="#F59E0B" rx="1.5"/>
+                            <rect x="155" y="160" width="55" height="3" fill="#06B6D4" rx="1.5"/>
+                            <rect x="155" y="170" width="25" height="3" fill="#EF4444" rx="1.5"/>
+                            <rect x="155" y="180" width="65" height="3" fill="#8B5CF6" rx="1.5"/>
+                            <rect x="155" y="190" width="40" height="3" fill="#10B981" rx="1.5"/>
+                            
+                            <!-- Student Character -->
+                            <!-- Head -->
+                            <circle cx="200" cy="80" r="35" fill="#FBBF24"/>
+                            
+                            <!-- Hair -->
+                            <path d="M 165 60 Q 200 45 235 60 Q 235 80 200 85 Q 165 80 165 60" fill="#92400E"/>
+                            
                             <!-- Eyes -->
-                            <rect x="135" y="110" width="8" height="8" fill="#000"/>
-                            <rect x="157" y="110" width="8" height="8" fill="#000"/>
+                            <circle cx="185" cy="75" r="4" fill="#1F2937"/>
+                            <circle cx="215" cy="75" r="4" fill="#1F2937"/>
+                            <circle cx="186" cy="74" r="1.5" fill="#FFFFFF"/>
+                            <circle cx="216" cy="74" r="1.5" fill="#FFFFFF"/>
+                            
+                            <!-- Glasses -->
+                            <circle cx="185" cy="75" r="12" fill="none" stroke="#1F2937" stroke-width="2"/>
+                            <circle cx="215" cy="75" r="12" fill="none" stroke="#1F2937" stroke-width="2"/>
+                            <line x1="197" y1="75" x2="203" y2="75" stroke="#1F2937" stroke-width="2"/>
+                            
+                            <!-- Eyebrows -->
+                            <path d="M 175 65 Q 185 62 195 65" stroke="#92400E" stroke-width="2" fill="none"/>
+                            <path d="M 205 65 Q 215 62 225 65" stroke="#92400E" stroke-width="2" fill="none"/>
+                            
+                            <!-- Smile -->
+                            <path d="M 185 90 Q 200 100 215 90" stroke="#1F2937" stroke-width="2" fill="none"/>
+                            
+                            <!-- Body -->
+                            <rect x="150" y="115" width="100" height="105" fill="#3B82F6" rx="15"/>
+                            
                             <!-- Arms -->
-                            <rect x="100" y="150" width="20" height="40" fill="#FCD34D" stroke="#000" stroke-width="2"/>
-                            <rect x="180" y="150" width="20" height="40" fill="#FCD34D" stroke="#000" stroke-width="2"/>
-                            <!-- Legs -->
-                            <rect x="130" y="220" width="15" height="40" fill="#92400E" stroke="#000" stroke-width="2"/>
-                            <rect x="155" y="220" width="15" height="40" fill="#92400E" stroke="#000" stroke-width="2"/>
+                            <ellipse cx="130" cy="160" rx="20" ry="40" fill="#FBBF24"/>
+                            <ellipse cx="270" cy="160" rx="20" ry="40" fill="#FBBF24"/>
+                            
+                            <!-- Hands -->
+                            <circle cx="130" cy="200" r="12" fill="#FBBF24"/>
+                            <circle cx="270" cy="200" r="12" fill="#FBBF24"/>
+                            
+                            <!-- Keyboard -->
+                            <rect x="100" y="240" width="200" height="40" fill="#64748B" rx="6"/>
+                            
+                            <!-- Individual Keys (simplified) -->
+                            <rect x="110" y="250" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="130" y="250" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="150" y="250" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="170" y="250" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="190" y="250" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="210" y="250" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="230" y="250" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="250" y="250" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="270" y="250" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            
+                            <rect x="120" y="262" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="140" y="262" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="160" y="262" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="180" y="262" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="200" y="262" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="220" y="262" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="240" y="262" width="15" height="8" fill="#F1F5F9" rx="2"/>
+                            <rect x="260" y="262" width="15" height="8" fill="#F1F5F9" rx="2"/>
                         </svg>
                     </div>
                     
-                    <!-- Floating Elements -->
-                    <div class="absolute top-10 left-10 w-8 h-8 bg-yellow-400 border-2 border-black animate-bounce"></div>
-                    <div class="absolute top-20 right-20 w-6 h-6 bg-yellow-400 border-2 border-black rounded-full animate-bounce" style="animation-delay: 0.5s;"></div>
-                    <div class="absolute bottom-20 left-20 w-10 h-10 bg-yellow-400 border-2 border-black animate-bounce" style="animation-delay: 1s;"></div>
+                    <!-- Floating Tech Elements -->
+                    <div class="absolute top-10 left-10 animate-bounce">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="6" width="18" height="12" rx="2" stroke="white" stroke-width="2"/>
+                                <path d="M8 10h8M8 14h6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute top-20 right-20 animate-bounce" style="animation-delay: 0.5s;">
+                        <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-lg flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-20 left-20 animate-bounce" style="animation-delay: 1s;">
+                        <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg shadow-lg flex items-center justify-center">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="white" stroke-width="2"/>
+                                <path d="M8 8h8M8 12h6M8 16h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute top-32 right-10 animate-bounce" style="animation-delay: 1.5s;">
+                        <div class="w-8 h-8 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg shadow-lg flex items-center justify-center">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-32 right-32 animate-bounce" style="animation-delay: 2s;">
+                        <div class="w-11 h-11 bg-gradient-to-br from-red-500 to-pink-500 rounded-lg shadow-lg flex items-center justify-center">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -220,7 +447,7 @@
     <!-- Keunggulan Section -->
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 fade-in">
                 <h2 class="pixel-font text-blue-900 text-2xl md:text-4xl mb-4">
                     KEUNGGULAN SISTEM PEMBELAJARAN ARCADE
                 </h2>
@@ -231,7 +458,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Metode Fleksibel -->
-                <div class="bg-white rounded-lg p-8 text-center pixel-card shadow-lg">
+                <div class="bg-white rounded-lg p-8 text-center pixel-card shadow-lg scale-in">
                     <div class="w-16 h-16 bg-yellow-400 border-3 border-black mx-auto mb-6 flex items-center justify-center">
                         <svg width="32" height="32" viewBox="0 0 32 32" class="pixel-icon">
                             <rect x="4" y="8" width="24" height="16" fill="#4F46E5" stroke="#000" stroke-width="2"/>
@@ -246,7 +473,7 @@
                 </div>
                 
                 <!-- Materi Lengkap -->
-                <div class="bg-white rounded-lg p-8 text-center pixel-card shadow-lg">
+                <div class="bg-white rounded-lg p-8 text-center pixel-card shadow-lg scale-in">
                     <div class="w-16 h-16 bg-yellow-400 border-3 border-black mx-auto mb-6 flex items-center justify-center">
                         <svg width="32" height="32" viewBox="0 0 32 32" class="pixel-icon">
                             <rect x="6" y="4" width="20" height="24" fill="#10B981" stroke="#000" stroke-width="2"/>
@@ -262,7 +489,7 @@
                 </div>
                 
                 <!-- Biaya Terjangkau -->
-                <div class="bg-white rounded-lg p-8 text-center pixel-card shadow-lg">
+                <div class="bg-white rounded-lg p-8 text-center pixel-card shadow-lg scale-in">
                     <div class="w-16 h-16 bg-yellow-400 border-3 border-black mx-auto mb-6 flex items-center justify-center">
                         <svg width="32" height="32" viewBox="0 0 32 32" class="pixel-icon">
                             <rect x="4" y="12" width="24" height="16" fill="#F59E0B" stroke="#000" stroke-width="2"/>
@@ -279,10 +506,110 @@
         </div>
     </section>
 
-    <!-- Pilihan Kelas Section -->
-    <section id="kelas" class="py-20 bg-white">
+    <!-- Event Section -->
+    <section id="event" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="pixel-font text-blue-900 text-2xl md:text-4xl mb-4">
+                    EVENT & WORKSHOP TERBARU
+                </h2>
+                <p class="clean-font text-gray-600 text-lg max-w-2xl mx-auto">
+                    Ikuti webinar dan workshop gratis untuk meningkatkan skill digitalmu
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <!-- Webinar Web Development -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-6 pixel-card shadow-lg scale-in">
+                    <div class="bg-blue-500 text-white px-3 py-1 rounded-full text-xs clean-font font-medium mb-4 inline-block">
+                        WEBINAR GRATIS
+                    </div>
+                    <h3 class="pixel-font text-blue-900 text-lg mb-3">WEB DEV BOOTCAMP</h3>
+                    <p class="clean-font text-gray-600 text-sm mb-4 leading-relaxed">
+                        Belajar HTML, CSS, dan JavaScript dari nol hingga mahir dalam 3 jam intensif
+                    </p>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">📅</span>
+                            <span class="clean-font">Sabtu, 15 Februari 2025</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">⏰</span>
+                            <span class="clean-font">09:00 - 12:00 WIB</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">👥</span>
+                            <span class="clean-font">Sisa 25 kursi</span>
+                        </div>
+                    </div>
+                    <button class="w-full game-button px-4 py-3 pixel-font text-xs text-blue-900">
+                        DAFTAR SEKARANG
+                    </button>
+                </div>
+                
+                <!-- Workshop Design -->
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-lg p-6 pixel-card shadow-lg scale-in">
+                    <div class="bg-purple-500 text-white px-3 py-1 rounded-full text-xs clean-font font-medium mb-4 inline-block">
+                        WORKSHOP
+                    </div>
+                    <h3 class="pixel-font text-purple-900 text-lg mb-3">FIGMA MASTERCLASS</h3>
+                    <p class="clean-font text-gray-600 text-sm mb-4 leading-relaxed">
+                        Kuasai Figma untuk UI/UX Design dengan project real-world
+                    </p>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">📅</span>
+                            <span class="clean-font">Minggu, 16 Februari 2025</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">⏰</span>
+                            <span class="clean-font">13:00 - 17:00 WIB</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">👥</span>
+                            <span class="clean-font">Sisa 12 kursi</span>
+                        </div>
+                    </div>
+                    <button class="w-full game-button px-4 py-3 pixel-font text-xs text-blue-900">
+                        DAFTAR SEKARANG
+                    </button>
+                </div>
+                
+                <!-- Seminar Digital Marketing -->
+                <div class="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-200 rounded-lg p-6 pixel-card shadow-lg scale-in">
+                    <div class="bg-green-500 text-white px-3 py-1 rounded-full text-xs clean-font font-medium mb-4 inline-block">
+                        SEMINAR
+                    </div>
+                    <h3 class="pixel-font text-green-900 text-lg mb-3">DIGITAL MARKETING</h3>
+                    <p class="clean-font text-gray-600 text-sm mb-4 leading-relaxed">
+                        Strategi pemasaran digital untuk UMKM dan startup
+                    </p>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">📅</span>
+                            <span class="clean-font">Sabtu, 22 Februari 2025</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">⏰</span>
+                            <span class="clean-font">14:00 - 16:00 WIB</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">👥</span>
+                            <span class="clean-font">Sisa 8 kursi</span>
+                        </div>
+                    </div>
+                    <button class="w-full game-button px-4 py-3 pixel-font text-xs text-blue-900">
+                        DAFTAR SEKARANG
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pilihan Kelas Section -->
+    <section id="kelas" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
                 <h2 class="pixel-font text-blue-900 text-2xl md:text-4xl mb-4">
                     PILIH QUEST DIGITALMU
                 </h2>
@@ -293,7 +620,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Web Programming -->
-                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 text-center pixel-card shadow-lg quest-card" data-quest="web">
+                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 text-center pixel-card shadow-lg quest-card scale-in" data-quest="web">
                     <div class="w-16 h-16 bg-blue-500 border-3 border-black mx-auto mb-6 flex items-center justify-center">
                         <svg width="32" height="32" viewBox="0 0 32 32" class="pixel-icon">
                             <rect x="2" y="6" width="28" height="20" fill="#FCD34D" stroke="#000" stroke-width="2"/>
@@ -312,7 +639,7 @@
                 </div>
                 
                 <!-- Graphics Design -->
-                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 text-center pixel-card shadow-lg quest-card" data-quest="design">
+                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 text-center pixel-card shadow-lg quest-card scale-in" data-quest="design">
                     <div class="w-16 h-16 bg-purple-500 border-3 border-black mx-auto mb-6 flex items-center justify-center">
                         <svg width="32" height="32" viewBox="0 0 32 32" class="pixel-icon">
                             <ellipse cx="16" cy="16" rx="12" ry="8" fill="#F59E0B" stroke="#000" stroke-width="2"/>
@@ -330,7 +657,7 @@
                 </div>
                 
                 <!-- Microsoft Office -->
-                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 text-center pixel-card shadow-lg quest-card" data-quest="office">
+                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 text-center pixel-card shadow-lg quest-card scale-in" data-quest="office">
                     <div class="w-16 h-16 bg-green-500 border-3 border-black mx-auto mb-6 flex items-center justify-center">
                         <svg width="32" height="32" viewBox="0 0 32 32" class="pixel-icon">
                             <rect x="6" y="4" width="20" height="24" fill="#FCD34D" stroke="#000" stroke-width="2"/>
@@ -349,7 +676,7 @@
                 </div>
                 
                 <!-- Coding for Kids -->
-                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 text-center pixel-card shadow-lg quest-card" data-quest="kids">
+                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 text-center pixel-card shadow-lg quest-card scale-in" data-quest="kids">
                     <div class="w-16 h-16 bg-red-500 border-3 border-black mx-auto mb-6 flex items-center justify-center">
                         <svg width="32" height="32" viewBox="0 0 32 32" class="pixel-icon">
                             <rect x="4" y="8" width="24" height="16" fill="#3B82F6" stroke="#000" stroke-width="2"/>
@@ -593,6 +920,76 @@
     </a>
 
     <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.classList.add('hidden');
+                
+                // Initialize scroll animations after loading
+                setTimeout(() => {
+                    initScrollAnimations();
+                }, 500);
+            }, 2000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        const line3 = document.getElementById('line3');
+        
+        let isMenuOpen = false;
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                mobileMenu.style.maxHeight = '300px';
+                line1.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                line2.style.opacity = '0';
+                line3.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                mobileMenu.style.maxHeight = '0';
+                line1.style.transform = 'rotate(0) translate(0, 0)';
+                line2.style.opacity = '1';
+                line3.style.transform = 'rotate(0) translate(0, 0)';
+            }
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                mobileMenu.style.maxHeight = '0';
+                line1.style.transform = 'rotate(0) translate(0, 0)';
+                line2.style.opacity = '1';
+                line3.style.transform = 'rotate(0) translate(0, 0)';
+            });
+        });
+
+        // Scroll Animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animation elements
+            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
         // Accordion functionality
         document.querySelectorAll('.accordion-trigger').forEach(trigger => {
             trigger.addEventListener('click', function() {
@@ -672,5 +1069,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986f5482e53df876',t:'MTc1OTE4OTI3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986f61cd0717f876',t:'MTc1OTE4OTgxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
